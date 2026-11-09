@@ -1,0 +1,28 @@
+[
+  {
+    "case_name": "普通内容审核",
+    "content": "今天天气不错",
+    "expected_decision": "pass",
+    "expected_risk_level": "low"
+  },
+  {
+    "case_name": "低风险内容审核",
+    "content": "这是一段低风险内容",
+    "expected_decision": "review",
+    "expected_risk_level": "medium"
+  },
+  {
+    "case_name": "严重违规内容审核",
+    "content": "这是一段严重违规内容",
+    "expected_decision": "block",
+    "expected_risk_level": "high"
+  },
+  {
+    "case_name": "严重违规优先级测试",
+    "content": "低风险内容，同时包含严重违规",
+    "expected_decision": "block",
+    "expected_risk_level": "high"
+  }
+]
+
+

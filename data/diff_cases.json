@@ -1,0 +1,27 @@
+[
+  {
+    "case_name": "普通内容",
+    "content": "今天天气不错",
+    "expected_diff": false
+  },
+  {
+    "case_name": "低风险内容",
+    "content": "这是一段低风险内容",
+    "expected_diff": false
+  },
+  {
+    "case_name": "严重违规内容",
+    "content": "这是一段严重违规内容",
+    "expected_diff": false
+  },
+  {
+    "case_name": "新增诈骗识别规则",
+    "content": "这是一段诈骗内容",
+    "expected_diff": true
+  },
+  {
+    "case_name": "同时包含严重违规和诈骗",
+    "content": "严重违规内容，同时包含诈骗",
+    "expected_diff": false
+  }
+]
