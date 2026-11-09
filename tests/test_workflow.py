@@ -1,65 +1,141 @@
 
-def test_manual_review_workflow(client):
-    """测试完整人工审核流程"""
+import pytest
 
-    # 第一步：创建待人工审核任务
-    create_response = client.post(
+
+def create_review_task(client):
+    """创建一个等待人工审核的低风险任务"""
+
+    response = client.post(
         "/api/v1/moderation/tasks",
-        json={"content": "这是一段低风险内容"}
+        json={"content": "这是一条低风险测试内容"}
     )
 
-    assert create_response.status_code == 200
+    assert response.status_code == 200
 
-    task = create_response.json()
-    task_id = task["task_id"]
+    task_id = response.json()["task_id"]
+    return task_id
+
+
+def test_create_review_task(client):
+    """创建低风险任务后，状态应该是pending"""
+
+    response = client.post(
+        "/api/v1/moderation/tasks",
+        json={"content": "这是一条低风险测试内容"}
+    )
+
+    assert response.status_code == 200
+
+    task = response.json()
 
     assert task["status"] == "pending"
     assert task["decision"] == "review"
 
-    # 第二步：查询任务
-    get_response = client.get(
-        f"/api/v1/moderation/tasks/{task_id}"
-    )
 
-    assert get_response.status_code == 200
-    assert get_response.json()["task_id"] == task_id
+@pytest.mark.parametrize(
+    "decision",
+    [
+        pytest.param("pass", id="manual-pass"),
+        pytest.param("block", id="manual-block"),
+    ],
+)
+def test_manual_review_success(client, decision):
+    """pending任务经过合法人工审核后应该变成completed"""
 
-    # 第三步：人工审核，判定为 block
-    review_response = client.post(
+    task_id = create_review_task(client)
+
+    response = client.post(
         f"/api/v1/moderation/tasks/{task_id}/manual-review",
-        json={"decision": "block"}
+        json={"decision": decision}
     )
 
-    assert review_response.status_code == 200
+    assert response.status_code == 200
 
-    reviewed_task = review_response.json()
+    task = response.json()
 
-    assert reviewed_task["status"] == "completed"
-    assert reviewed_task["decision"] == "block"
-    assert reviewed_task["risk_level"] == "high"
+    assert task["status"] == "completed"
+    assert task["decision"] == decision
 
-    # 第四步：再次审核，应该失败
-    repeat_response = client.post(
+
+def test_cannot_review_completed_task(client):
+    """已经完成的任务不能再次人工审核"""
+
+    task_id = create_review_task(client)
+
+    # 第一次人工审核，完成任务
+    first_response = client.post(
         f"/api/v1/moderation/tasks/{task_id}/manual-review",
         json={"decision": "pass"}
     )
 
-    assert repeat_response.status_code == 409
+    assert first_response.status_code == 200
+    assert first_response.json()["status"] == "completed"
 
-
-def test_invalid_manual_decision(client):
-    """人工审核不允许使用非法结果"""
-
-    create_response = client.post(
-        "/api/v1/moderation/tasks",
-        json={"content": "这是一段低风险内容"}
+    # 第二次人工审核，应该被拒绝
+    second_response = client.post(
+        f"/api/v1/moderation/tasks/{task_id}/manual-review",
+        json={"decision": "block"}
     )
 
-    task_id = create_response.json()["task_id"]
+    assert second_response.status_code == 409
 
-    review_response = client.post(
+    # 再次查询，确认原来的审核结果没有被改变
+    query_response = client.get(
+        f"/api/v1/moderation/tasks/{task_id}"
+    )
+
+    assert query_response.status_code == 200
+    assert query_response.json()["status"] == "completed"
+    assert query_response.json()["decision"] == "pass"
+
+
+def test_invalid_review_decision(client):
+    """非法人工审核结果应该被拒绝"""
+
+    task_id = create_review_task(client)
+
+    response = client.post(
         f"/api/v1/moderation/tasks/{task_id}/manual-review",
         json={"decision": "unknown"}
     )
 
-    assert review_response.status_code == 400
+    assert response.status_code == 400
+
+
+def test_invalid_review_does_not_change_task_status(client):
+    """非法审核操作不能改变任务原来的pending状态"""
+
+    task_id = create_review_task(client)
+
+    # 提交非法审核结果
+    response = client.post(
+        f"/api/v1/moderation/tasks/{task_id}/manual-review",
+        json={"decision": "unknown"}
+    )
+
+    assert response.status_code == 400
+
+    # 查询任务，确认状态没有改变
+    query_response = client.get(
+        f"/api/v1/moderation/tasks/{task_id}"
+    )
+
+    assert query_response.status_code == 200
+
+    task = query_response.json()
+
+    assert task["status"] == "pending"
+    assert task["decision"] == "review"
+
+
+
+def test_manual_review_missing_task(client):
+    """对不存在的任务进行人工审核，应该返回404"""
+
+    response = client.post(
+        "/api/v1/moderation/tasks/not-exist/manual-review",
+        json={"decision": "pass"}
+    )
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "审核任务不存在"
