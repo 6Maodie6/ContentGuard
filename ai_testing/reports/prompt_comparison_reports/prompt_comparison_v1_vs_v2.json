@@ -1,0 +1,51 @@
+{
+    "v1_model": "modelscope.cn/Qwen/Qwen3-8B-GGUF:Q4_K_M",
+    "v2_model": "modelscope.cn/Qwen/Qwen3-8B-GGUF:Q4_K_M",
+    "v1_prompt_version": "v1",
+    "v2_prompt_version": "v2",
+    "v1_evaluated_at": "2026-11-12T07:59:05.072027+00:00",
+    "v2_evaluated_at": "2026-11-12T08:02:18.657945+00:00",
+    "total_cases": 10,
+    "fixed_count": 1,
+    "regressed_count": 0,
+    "unchanged_count": 9,
+    "fixed_cases": [
+        {
+            "id": "AI010",
+            "expected": "pass",
+            "v1_predicted": "review",
+            "v2_predicted": "pass",
+            "v1_reason": "文本包含大量特殊符号（!!!@@@###）且数字组合混杂，可能存在隐藏不良信息或测试审核系统意图，需人工进一步核实",
+            "v2_reason": "文本包含无意义字符和普通商品介绍，无明确违规风险"
+        }
+    ],
+    "regressed_cases": [],
+    "unchanged_case_ids": [
+        "AI001",
+        "AI002",
+        "AI003",
+        "AI004",
+        "AI005",
+        "AI008",
+        "AI009",
+        "AI011",
+        "AI012"
+    ],
+    "metric_comparison": {
+        "accuracy": {
+            "v1": 0.8,
+            "v2": 0.9,
+            "change": 0.09999999999999998
+        },
+        "macro_f1": {
+            "v1": 0.7685185185185185,
+            "v2": 0.8518518518518517,
+            "change": 0.08333333333333326
+        },
+        "weighted_f1": {
+            "v1": 0.7972222222222223,
+            "v2": 0.9111111111111111,
+            "change": 0.11388888888888882
+        }
+    }
+}

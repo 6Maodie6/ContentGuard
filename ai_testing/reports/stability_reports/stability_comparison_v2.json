@@ -1,0 +1,271 @@
+{
+    "comparison_type": "stability",
+    "model": "modelscope.cn/Qwen/Qwen3-8B-GGUF:Q4_K_M",
+    "prompt_version": "v2",
+    "repeats": 5,
+    "compared_at": "2026-11-13T15:37:56",
+    "summary": [
+        {
+            "temperature": 0,
+            "total_cases": 10,
+            "stable_cases": 9,
+            "unstable_cases": 1,
+            "case_stability_rate": 0.9,
+            "average_agreement_rate": 0.9800000000000001
+        },
+        {
+            "temperature": 0.3,
+            "total_cases": 10,
+            "stable_cases": 9,
+            "unstable_cases": 1,
+            "case_stability_rate": 0.9,
+            "average_agreement_rate": 0.9800000000000001
+        },
+        {
+            "temperature": 0.7,
+            "total_cases": 10,
+            "stable_cases": 7,
+            "unstable_cases": 3,
+            "case_stability_rate": 0.7,
+            "average_agreement_rate": 0.8800000000000001
+        }
+    ],
+    "case_comparison": {
+        "AI001": {
+            "0": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            }
+        },
+        "AI002": {
+            "0": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            }
+        },
+        "AI003": {
+            "0": {
+                "counts": {
+                    "review": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "pass": 1,
+                    "review": 4
+                },
+                "agreement_rate": 0.8,
+                "stable": false
+            },
+            "0.7": {
+                "counts": {
+                    "review": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            }
+        },
+        "AI004": {
+            "0": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            }
+        },
+        "AI005": {
+            "0": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            }
+        },
+        "AI008": {
+            "0": {
+                "counts": {
+                    "review": 1,
+                    "pass": 4
+                },
+                "agreement_rate": 0.8,
+                "stable": false
+            },
+            "0.3": {
+                "counts": {
+                    "review": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "block": 2,
+                    "review": 1,
+                    "pass": 2
+                },
+                "agreement_rate": 0.4,
+                "stable": false
+            }
+        },
+        "AI009": {
+            "0": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            }
+        },
+        "AI010": {
+            "0": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "review": 2,
+                    "pass": 3
+                },
+                "agreement_rate": 0.6,
+                "stable": false
+            }
+        },
+        "AI011": {
+            "0": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "block": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "block": 4,
+                    "review": 1
+                },
+                "agreement_rate": 0.8,
+                "stable": false
+            }
+        },
+        "AI012": {
+            "0": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.3": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            },
+            "0.7": {
+                "counts": {
+                    "pass": 5
+                },
+                "agreement_rate": 1.0,
+                "stable": true
+            }
+        }
+    }
+}

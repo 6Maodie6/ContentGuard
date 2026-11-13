@@ -1,22 +1,33 @@
-# Python 缓存
+# Python
 __pycache__/
 *.py[cod]
 
-# 虚拟环境
+# Virtual environment
 .venv/
 venv/
+env/
 
-# 测试缓存
+# pytest
 .pytest_cache/
 
-# 测试报告和原始结果
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+
+# Allure
 allure-results/
 allure-report/
-report.html
 
-# 日志
-logs/
+# Temporary reports
+report.html
+pytest-report.html
+
+# Logs
 *.log
 
-# IDE 配置
+# IDE and OS
 .vscode/
+.idea/
+.DS_Store
+Thumbs.db
