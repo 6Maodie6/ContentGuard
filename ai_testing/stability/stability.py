@@ -11,9 +11,9 @@ from ai_testing.prompts.prompt_v2 import SYSTEM_PROMPT_V2
 from ai_testing.prompts.prompt_v3 import SYSTEM_PROMPT_V3
 from ai_testing.prompts.prompt_v4 import SYSTEM_PROMPT_V4
 
-AI_TESTING_DIR = Path(__file__).resolve().parent
+AI_TESTING_DIR = Path(__file__).resolve().parent.parent
 DATASET_PATH = AI_TESTING_DIR / "dataset" / "golden_dataset.json"
-REPORT_DIR = AI_TESTING_DIR / "reports"
+REPORT_DIR = AI_TESTING_DIR / "reports" / "stability_reports"
 
 LABELS = {"pass", "review", "block"}
 

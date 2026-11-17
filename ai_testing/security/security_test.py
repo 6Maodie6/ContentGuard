@@ -8,9 +8,9 @@ from ai_testing.clients.ollama_client import OllamaClient
 from ai_testing.stability.stability import load_prompt
 
 
-AI_TESTING_DIR = Path(__file__).resolve().parent
+AI_TESTING_DIR = Path(__file__).resolve().parent.parent
 DATASET_PATH = AI_TESTING_DIR / "dataset" / "security_dataset.json"
-REPORT_DIR = AI_TESTING_DIR / "reports"
+REPORT_DIR = AI_TESTING_DIR / "reports" / "security_reports"
 
 VALID_LABELS = {"pass", "review", "block"}
 
